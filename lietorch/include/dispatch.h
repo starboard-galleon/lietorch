@@ -1,7 +1,7 @@
 #ifndef DISPATCH_H
 #define DISPATCH_H
 
-#include <torch/extension.h>
+#include <torch/types.h>
 
 #include "so3.h"
 #include "rxso3.h"

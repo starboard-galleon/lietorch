@@ -29,11 +29,12 @@ setup(
                     '-gencode=arch=compute_70,code=sm_70', 
                     '-gencode=arch=compute_75,code=sm_75',
                     '-gencode=arch=compute_75,code=compute_75',
-                    
+                    '-DEIGEN_HAS_STD_HASH=0',
+
                 ]
             }),
 
-        CUDAExtension('lietorch_extras', 
+        CUDAExtension('lietorch_extras',
             sources=[
                 'lietorch/extras/altcorr_kernel.cu',
                 'lietorch/extras/corr_index_kernel.cu',
@@ -50,7 +51,8 @@ setup(
                     '-gencode=arch=compute_70,code=sm_70', 
                     '-gencode=arch=compute_75,code=sm_75',
                     '-gencode=arch=compute_75,code=compute_75',
-                    
+                    '-DEIGEN_HAS_STD_HASH=0',
+
                 ]
             }),
     ],

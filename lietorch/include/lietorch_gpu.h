@@ -3,7 +3,7 @@
 #define LIETORCH_GPU_H_
 
 #include <vector>
-#include <torch/extension.h>
+#include <torch/types.h>
 #include <cuda.h>
 #include <cuda_runtime.h>
 

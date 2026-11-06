@@ -13,7 +13,7 @@
 
 
 template <typename Group, typename scalar_t>
-void exp_forward_kernel(const scalar_t* a_ptr, scalar_t* X_ptr, int batch_size) {
+static void exp_forward_kernel(const scalar_t* a_ptr, scalar_t* X_ptr, int batch_size) {
     // exponential map forward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Data = Eigen::Matrix<scalar_t,Group::N,1>;
@@ -27,7 +27,7 @@ void exp_forward_kernel(const scalar_t* a_ptr, scalar_t* X_ptr, int batch_size) 
 }
 
 template <typename Group, typename scalar_t>
-void exp_backward_kernel(const scalar_t* grad, const scalar_t* a_ptr, scalar_t* da, int batch_size) {
+static void exp_backward_kernel(const scalar_t* grad, const scalar_t* a_ptr, scalar_t* da, int batch_size) {
     // exponential map backward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Grad = Eigen::Matrix<scalar_t,1,Group::K>;
@@ -42,7 +42,7 @@ void exp_backward_kernel(const scalar_t* grad, const scalar_t* a_ptr, scalar_t* 
 }
 
 template <typename Group, typename scalar_t>
-void log_forward_kernel(const scalar_t* X_ptr, scalar_t* a_ptr, int batch_size) {
+static void log_forward_kernel(const scalar_t* X_ptr, scalar_t* a_ptr, int batch_size) {
     // logarithm map forward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
 
@@ -55,7 +55,7 @@ void log_forward_kernel(const scalar_t* X_ptr, scalar_t* a_ptr, int batch_size) 
 }
 
 template <typename Group, typename scalar_t>
-void log_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, scalar_t* dX, int batch_size) {
+static void log_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, scalar_t* dX, int batch_size) {
     // logarithm map backward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Grad = Eigen::Matrix<scalar_t,1,Group::K>;
@@ -70,7 +70,7 @@ void log_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, scalar_t* 
 }
 
 template <typename Group, typename scalar_t>
-void inv_forward_kernel(const scalar_t* X_ptr, scalar_t* Y_ptr, int batch_size) {
+static void inv_forward_kernel(const scalar_t* X_ptr, scalar_t* Y_ptr, int batch_size) {
     // group inverse forward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Data = Eigen::Matrix<scalar_t,Group::N,1>;
@@ -84,7 +84,7 @@ void inv_forward_kernel(const scalar_t* X_ptr, scalar_t* Y_ptr, int batch_size) 
 }
 
 template <typename Group, typename scalar_t>
-void inv_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, scalar_t *dX, int batch_size) {
+static void inv_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, scalar_t *dX, int batch_size) {
     // group inverse backward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Grad = Eigen::Matrix<scalar_t,1,Group::K>;
@@ -99,7 +99,7 @@ void inv_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, scalar_t *
 }
 
 template <typename Group, typename scalar_t>
-void mul_forward_kernel(const scalar_t* X_ptr, const scalar_t* Y_ptr, scalar_t* Z_ptr, int batch_size) {
+static void mul_forward_kernel(const scalar_t* X_ptr, const scalar_t* Y_ptr, scalar_t* Z_ptr, int batch_size) {
     // group multiplication forward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Data = Eigen::Matrix<scalar_t,Group::N,1>;
@@ -113,7 +113,7 @@ void mul_forward_kernel(const scalar_t* X_ptr, const scalar_t* Y_ptr, scalar_t* 
 }
 
 template <class Group, typename scalar_t>
-void mul_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scalar_t* Y_ptr, scalar_t* dX, scalar_t* dY, int batch_size) {
+static void mul_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scalar_t* Y_ptr, scalar_t* dX, scalar_t* dY, int batch_size) {
     // group multiplication backward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Grad = Eigen::Matrix<scalar_t,1,Group::K>;
@@ -130,7 +130,7 @@ void mul_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scal
 }
 
 template <typename Group, typename scalar_t>
-void adj_forward_kernel(const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t* b_ptr, int batch_size) {
+static void adj_forward_kernel(const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t* b_ptr, int batch_size) {
     // adjoint forward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Data = Eigen::Matrix<scalar_t,Group::N,1>;
@@ -145,7 +145,7 @@ void adj_forward_kernel(const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t* 
 }
 
 template <typename Group, typename scalar_t>
-void adj_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t* dX, scalar_t* da, int batch_size) {
+static void adj_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t* dX, scalar_t* da, int batch_size) {
     // adjoint backward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Grad = Eigen::Matrix<scalar_t,1,Group::K>;
@@ -166,7 +166,7 @@ void adj_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scal
 }
 
 template <typename Group, typename scalar_t>
-void adjT_forward_kernel(const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t* b_ptr, int batch_size) {
+static void adjT_forward_kernel(const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t* b_ptr, int batch_size) {
     // adjoint forward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Data = Eigen::Matrix<scalar_t,Group::N,1>;
@@ -181,7 +181,7 @@ void adjT_forward_kernel(const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t*
 }
 
 template <typename Group, typename scalar_t>
-void adjT_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t* dX, scalar_t* da, int batch_size) {
+static void adjT_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t* dX, scalar_t* da, int batch_size) {
     // adjoint backward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Grad = Eigen::Matrix<scalar_t,1,Group::K>;
@@ -201,7 +201,7 @@ void adjT_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const sca
 
 
 template <typename Group, typename scalar_t>
-void act_forward_kernel(const scalar_t* X_ptr, const scalar_t* p_ptr, scalar_t* q_ptr, int batch_size) {
+static void act_forward_kernel(const scalar_t* X_ptr, const scalar_t* p_ptr, scalar_t* q_ptr, int batch_size) {
     // action on point forward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Data = Eigen::Matrix<scalar_t,Group::N,1>;
@@ -217,7 +217,7 @@ void act_forward_kernel(const scalar_t* X_ptr, const scalar_t* p_ptr, scalar_t* 
 }
 
 template <typename Group, typename scalar_t>
-void act_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scalar_t* p_ptr, scalar_t* dX, scalar_t* dp, int batch_size) {
+static void act_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scalar_t* p_ptr, scalar_t* dX, scalar_t* dp, int batch_size) {
     // adjoint backward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Grad = Eigen::Matrix<scalar_t,1,Group::K>;
@@ -270,7 +270,7 @@ void act_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scal
 
 
 template <typename Group, typename scalar_t>
-void act4_forward_kernel(const scalar_t* X_ptr, const scalar_t* p_ptr, scalar_t* q_ptr, int batch_size) {
+static void act4_forward_kernel(const scalar_t* X_ptr, const scalar_t* p_ptr, scalar_t* q_ptr, int batch_size) {
     // action on homogeneous point forward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Data = Eigen::Matrix<scalar_t,Group::N,1>;
@@ -286,7 +286,7 @@ void act4_forward_kernel(const scalar_t* X_ptr, const scalar_t* p_ptr, scalar_t*
 }
 
 template <typename Group, typename scalar_t>
-void act4_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scalar_t* p_ptr, scalar_t* dX, scalar_t* dp, int batch_size) {
+static void act4_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const scalar_t* p_ptr, scalar_t* dX, scalar_t* dp, int batch_size) {
     // action on homogeneous point backward kernel
 
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
@@ -309,7 +309,7 @@ void act4_backward_kernel(const scalar_t* grad, const scalar_t* X_ptr, const sca
 }
 
 template <typename Group, typename scalar_t>
-void as_matrix_forward_kernel(const scalar_t* X_ptr, scalar_t* T_ptr, int batch_size) {
+static void as_matrix_forward_kernel(const scalar_t* X_ptr, scalar_t* T_ptr, int batch_size) {
     // group inverse forward kernel
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Data = Eigen::Matrix<scalar_t,Group::N,1>;
@@ -324,7 +324,7 @@ void as_matrix_forward_kernel(const scalar_t* X_ptr, scalar_t* T_ptr, int batch_
 }
 
 template <typename Group, typename scalar_t>
-void orthogonal_projector_kernel(const scalar_t* X_ptr, scalar_t* P_ptr, int batch_size) {
+static void orthogonal_projector_kernel(const scalar_t* X_ptr, scalar_t* P_ptr, int batch_size) {
     // group inverse forward kernel
     using Proj = Eigen::Matrix<scalar_t,Group::N,Group::N,Eigen::RowMajor>;
     at::parallel_for(0, batch_size, 1, [&](int64_t start, int64_t end) {
@@ -336,7 +336,7 @@ void orthogonal_projector_kernel(const scalar_t* X_ptr, scalar_t* P_ptr, int bat
 }
 
 template <typename Group, typename scalar_t>
-void jleft_forward_kernel(const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t* b_ptr, int batch_size) {
+static void jleft_forward_kernel(const scalar_t* X_ptr, const scalar_t* a_ptr, scalar_t* b_ptr, int batch_size) {
     // left-jacobian inverse action
     using Tangent = Eigen::Matrix<scalar_t,Group::K,1>;
     using Data = Eigen::Matrix<scalar_t,Group::N,1>;
